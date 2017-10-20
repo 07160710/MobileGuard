@@ -54,7 +54,7 @@
                 android:textColorHint="@color/purple"/>
 
             <Button
-                android:id="@+id/addcontact"
+                android:id="@+id/btn_addcontact"
                 android:layout_width="55dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
