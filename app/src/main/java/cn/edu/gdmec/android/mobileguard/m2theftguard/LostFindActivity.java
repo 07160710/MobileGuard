@@ -35,20 +35,20 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
         return msharedPreferences.getBoolean("isSetUp",false);
     }
     private void initView(){
-        TextView mTitleTV=(TextView) findViewById(R.id.tv_title);
+        TextView mTitleTV = (TextView) findViewById(R.id.tv_title);
         mTitleTV.setText("手机防盗");
-        ImageView mLeftImgv=(ImageView) findViewById(R.id.imgv_leftbtn);
+        ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
         mLeftImgv.setOnClickListener(this);
         mLeftImgv.setImageResource(R.drawable.back);
         findViewById(R.id.rl_titlebar).setBackgroundColor(
                 getResources().getColor(R.color.purple));
-        mSafePhoneTV=(TextView) findViewById(R.id.tv_safephone);
-        mSafePhoneTV.setText(msharedPreferences.getString("safephone",""));
-        mToggleButton=(ToggleButton) findViewById(R.id.togglebtn_lostfind);
-        mInterSetupRL=(RelativeLayout) findViewById(R.id.rl_inter_setup_wizard);
+        mSafePhoneTV = (TextView) findViewById(R.id.tv_safephone);
+        mSafePhoneTV.setText(msharedPreferences.getString("safephone", ""));
+        mToggleButton = (ToggleButton) findViewById(R.id.togglebtn_lostfind);
+        mInterSetupRL = (RelativeLayout) findViewById(R.id.rl_inter_setup_wizard);
         mInterSetupRL.setOnClickListener(this);
-        mProtectStatusTV=(TextView) findViewById(R.id.tv_lostfind_protectstauts);
-        boolean protecting=msharedPreferences.getBoolean("protecting",true);
+        mProtectStatusTV = (TextView) findViewById(R.id.tv_lostfind_protectstauts);
+        boolean protecting = msharedPreferences.getBoolean("protecting",true);
         if (protecting){
             mProtectStatusTV.setText("防盗保护已经开启");
             mToggleButton.setChecked(true);
@@ -64,7 +64,7 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
                 }else{
                     mProtectStatusTV.setText("防盗保护没有开启");
                 }
-                SharedPreferences.Editor editor=msharedPreferences.edit();
+                SharedPreferences.Editor editor = msharedPreferences.edit();
                 editor.putBoolean("protecting",isChecked);
                 editor.commit();
             }

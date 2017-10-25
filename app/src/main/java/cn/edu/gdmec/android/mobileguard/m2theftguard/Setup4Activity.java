@@ -24,8 +24,8 @@ public class Setup4Activity extends BaseSetUpActivity {
 
     private void initView(){
         ((RadioButton)findViewById(R.id.rb_four)).setChecked(true);
-        mStatusTV=(TextView)findViewById(R.id.tv_setup4_status);
-        mToggleButton=(ToggleButton) findViewById(R.id.togglebtn_securityfunction);
+        mStatusTV = (TextView) findViewById(R.id.tv_setup4_status);
+        mToggleButton = (ToggleButton) findViewById(R.id.togglebtn_securityfunction);
         mToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
@@ -34,12 +34,12 @@ public class Setup4Activity extends BaseSetUpActivity {
                 }else{
                     mStatusTV.setText("防盗保护没有开启");
                 }
-                SharedPreferences.Editor editor=sp.edit();
+                SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean("protecting",isChecked);
                 editor.commit();
             }
         });
-        boolean protecting=sp.getBoolean("protecting",true);
+        boolean protecting = sp.getBoolean("protecting",true);
         if (protecting){
             mStatusTV.setText("防盗保护已经开启");
             mToggleButton.setChecked(true);
