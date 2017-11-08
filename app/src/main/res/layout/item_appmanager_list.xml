@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp" />
         <TextView
-            android:id="@+id/tv_appSize"
+            android:id="@+id/tv_appsize"
             style="@style/textview16sp"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
@@ -57,7 +57,7 @@
             style="@style/tvyellow14sp"
             android:drawableTop="@drawable/deleteicon_yellow_n"
             android:text="卸载"/>
-        <view
+        <View
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:background="@color/black30"/>
@@ -65,7 +65,7 @@
             android:id="@+id/tv_share_app"
             style="@style/tvyellow14sp"
             android:text="分享"
-            android:drawableTop="@drawable/shareicon_yellow_n" />
+            android:drawableTop="@drawable/shareicon_yellow_n"/>
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
@@ -74,6 +74,15 @@
             android:id="@+id/tv_setting_app"
             style="@style/tvyellow14sp"
             android:text="设置"
-            android:drawableTop="@drawable/settingicon_yellow_n" />
+            android:drawableTop="@drawable/settingicon_yellow_n"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/black30"/>
+        <TextView
+            android:id="@+id/tv_aboutapp"
+            style="@style/tvyellow14sp"
+            android:text="关于"
+            android:drawableTop="@drawable/abouticon_yellow_n"/>
     </LinearLayout>
 </LinearLayout>
