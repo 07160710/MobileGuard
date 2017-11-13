@@ -162,6 +162,7 @@ public class AppManagerAdapter extends BaseAdapter {
                     break;
                 case R.id.tv_aboutapp:
                     EngineUtils.AboutSign(context,appInfo);
+                    break;
             }
         }
     }
