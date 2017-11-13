@@ -84,5 +84,14 @@
             style="@style/tvyellow14sp"
             android:text="关于"
             android:drawableTop="@drawable/abouticon_yellow_n"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/black30"/>
+        <TextView
+            android:id="@+id/tv_activityapp"
+            style="@style/tvyellow14sp"
+            android:text="活动"
+            android:drawableTop="@drawable/activityicon_yellow_n"/>
     </LinearLayout>
 </LinearLayout>
