@@ -14,10 +14,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 
 public class VirusScanActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView mLastTimeTV;
     private SharedPreferences mSP;
+    private TextView mVersionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,13 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
     protected void onResume() {
         String string = mSP.getString("lastVirusScan","你还没有查杀病毒！");
         mLastTimeTV.setText(string);
+        AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
+        String virusVersion = dao.getVirusVersion();
+        mVersionTV = (TextView) findViewById(R.id.tv_version);
+        mVersionTV.setText("病毒数据库版本:"+virusVersion);
         super.onResume();
     }
+
     private void copyDB(final String dbname){
         new Thread(){
             public void run(){
@@ -79,4 +86,5 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
     }
+
 }
