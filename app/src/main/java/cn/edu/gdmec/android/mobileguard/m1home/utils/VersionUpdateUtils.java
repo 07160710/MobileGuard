@@ -29,6 +29,8 @@ public class VersionUpdateUtils {
     private String mVersion;
     private Activity context;
     private VersionEntity versionEntity;
+    //暂不升级跳的下个Activity
+    private Class<?> nextActivity;
 
     private static final int MESSAGE_IO_ERROR = 102;
     private static final int MESSAGE_JSON_ERROR = 103;
@@ -49,7 +51,8 @@ public class VersionUpdateUtils {
                     showUpdateDialog(versionEntity);
                     break;
                 case MESSAGE_ENTERHOME:
-                    Intent intent = new Intent(context, HomeActivity.class);
+                    //HomeActivity.class，新改动
+                    Intent intent = new Intent(context, nextActivity);
                     context.startActivity(intent);
                     context.finish();
                     break;
@@ -57,16 +60,20 @@ public class VersionUpdateUtils {
         }
     };
 
-    public VersionUpdateUtils(String mVersion, Activity context) {
+    public VersionUpdateUtils(String mVersion, Activity context,Class<?> nextActivity) {
         this.mVersion = mVersion;
         this.context = context;
+        //新改动，构造参数
+        this.nextActivity = nextActivity;
     }
-    public void getCloudVersion(){
+    public void getCloudVersion(String url){
         try {
             HttpClient httpClient = new DefaultHttpClient();
             HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 5000);
             HttpConnectionParams.setSoTimeout(httpClient.getParams(), 5000);
-            HttpGet httpGet = new HttpGet("http://android2017.duapp.com/updateinfo.html");
+            //"http://android2017.duapp.com/updateinfo.html"
+            //新改动
+            HttpGet httpGet = new HttpGet(url);
             HttpResponse execute = httpClient.execute(httpGet);
             if (execute.getStatusLine().getStatusCode() == 200) {
                 HttpEntity httpEntity = execute.getEntity();
@@ -112,6 +119,7 @@ public class VersionUpdateUtils {
     }
     private void downloadNewApk(String apkurl){
         DownloadUtils downloadUtils = new DownloadUtils();
+        //antivirus.db
         downloadUtils.downloadApk(apkurl,"mobileguard.apk",context);
     }
 }

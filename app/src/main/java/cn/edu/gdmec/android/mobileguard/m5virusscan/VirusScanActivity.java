@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m1home.utils.VersionUpdateUtils;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 
 public class VirusScanActivity extends AppCompatActivity implements View.OnClickListener{
@@ -29,6 +30,18 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         copyDB("antivirus.db");
         initView();
     }
+    //更新病毒库版本
+    public void updateVesion(String dbVersion){
+        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(dbVersion,VirusScanActivity.this,VirusScanActivity.class);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                versionUpdateUtils.getCloudVersion("http://android2017.duapp.com/virusupdateinfo.html");
+            }
+        }.start();
+    }
+    //
 
     @Override
     protected void onResume() {
@@ -38,6 +51,8 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         String virusVersion = dao.getVirusVersion();
         mVersionTV = (TextView) findViewById(R.id.tv_version);
         mVersionTV.setText("病毒数据库版本:"+virusVersion);
+        //调用版本病毒库版本
+        updateVesion(virusVersion);
         super.onResume();
     }
 
