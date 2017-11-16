@@ -2,6 +2,7 @@ package cn.edu.gdmec.android.mobileguard.m5virusscan;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,12 +28,12 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_virus_scan);
         mSP = getSharedPreferences("config",MODE_PRIVATE);
-        copyDB("antivirus.db");
+        copyDB("antivirus.db","");
         initView();
     }
     //更新病毒库版本
     public void updateVesion(String dbVersion){
-        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(dbVersion,VirusScanActivity.this,VirusScanActivity.class);
+        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(dbVersion,VirusScanActivity.this,downloadCallback,null);
         new Thread(){
             @Override
             public void run() {
@@ -41,7 +42,12 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
             }
         }.start();
     }
-    //
+    VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
+        @Override
+        public void afterDownload(String filename) {
+            copyDB("antivirus.db", Environment.getExternalStoragePublicDirectory("/download/").getPath());
+        }
+    };
 
     @Override
     protected void onResume() {
@@ -56,7 +62,7 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         super.onResume();
     }
 
-    private void copyDB(final String dbname){
+    private void copyDB(final String dbname,final String fromPath){
         new Thread(){
             public void run(){
                 try{
