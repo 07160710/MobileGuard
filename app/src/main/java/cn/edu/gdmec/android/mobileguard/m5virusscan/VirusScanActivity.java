@@ -3,6 +3,8 @@ package cn.edu.gdmec.android.mobileguard.m5virusscan;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
@@ -53,25 +56,44 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
     protected void onResume() {
         String string = mSP.getString("lastVirusScan","你还没有查杀病毒！");
         mLastTimeTV.setText(string);
-        AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
-        String virusVersion = dao.getVirusVersion();
-        mVersionTV = (TextView) findViewById(R.id.tv_version);
-        mVersionTV.setText("病毒数据库版本:"+virusVersion);
+        //AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
+        //String virusVersion = dao.getVirusVersion();
+        //mVersionTV = (TextView) findViewById(R.id.tv_version);
+        //mVersionTV.setText("病毒数据库版本:"+virusVersion);
         //调用版本病毒库版本
-        updateVesion(virusVersion);
+        //updateVesion(virusVersion);
         super.onResume();
     }
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
+            String virusVersion = dao.getVirusVersion();
+            mVersionTV = (TextView) findViewById(R.id.tv_version);
+            mVersionTV.setText("病毒数据库版本:"+virusVersion);
+            updateVesion(virusVersion);
+            super.handleMessage(msg);
+        }
+    };
 
     private void copyDB(final String dbname,final String fromPath){
         new Thread(){
             public void run(){
                 try{
                     File file = new File(getFilesDir(),dbname);
-                    if(file.exists()&&file.length()>0){
+                    if(file.exists()&&file.length()>0&&fromPath.equals("")){
                         Log.i("VirusScanActivity","数据库已存在！");
+                        handler.sendEmptyMessage(0);
                         return;
                     }
                     InputStream is = getAssets().open(dbname);
+                    if (fromPath.equals("")){
+                        is = getAssets().open(dbname);
+                    }else{
+                        file = new File(fromPath,
+                                "antivirus.db");
+                        is= new FileInputStream(file);
+                    }
                     FileOutputStream fos = openFileOutput(dbname,MODE_PRIVATE);
                     byte[] buffer = new byte[1024];
                     int len = 0;
@@ -80,6 +102,7 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
                     }
                     is.close();
                     fos.close();
+                    handler.sendEmptyMessage(0);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
