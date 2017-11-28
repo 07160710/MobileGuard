@@ -31,6 +31,7 @@ import cn.edu.gdmec.android.mobileguard.m5virusscan.adapter.ScanVirusAdapter;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.entity.ScanAppInfo;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.utils.MD5Utils;
+import cn.edu.gdmec.android.mobileguard.m5virusscan.utils.UrlClient;
 
 public class VirusScanSpeedActivity extends AppCompatActivity implements View.OnClickListener{
     protected static final int SCAN_BEGIN = 100;
@@ -182,7 +183,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
 
         @Override
         protected ScanAppInfo doInBackground(ScanAppInfo... scanAppInfos) {
-            /*String apiResult = Urlclient.UrlPost(scanAppInfos[0].viruscloudurl,"{\"md5\":\""+scanAppInfos[0].md5info+"\"}");
+            String apiResult = UrlClient.UrlPost(scanAppInfos[0].viruscloudurl,"{\"md5\":\""+scanAppInfos[0].md5info+"\"}");
             try{
                 JSONObject jsonObject = new JSONObject(apiResult);
                 scanAppInfos[0].isVirus = jsonObject.getBoolean("isVirus");
@@ -190,7 +191,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
                 return scanAppInfos[0];
             }catch(JSONException e){
                 e.printStackTrace();
-            }*/
+            }
             return null;
         }
 
