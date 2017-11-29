@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileGuard</string>
+    <string name="_operatorset_string">"仅一次简单设置，以后即可便捷矫正流量，时刻与运营商保持精准同步。"</string>
 </resources>
