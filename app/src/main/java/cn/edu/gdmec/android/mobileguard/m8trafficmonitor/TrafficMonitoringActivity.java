@@ -122,18 +122,18 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
                 SmsManager smsManager = SmsManager.getDefault();
                 switch (i){
                     case 0:
-
                         Toast.makeText(this, "您还没有设置运营商信息", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-
                         smsManager.sendTextMessage("10086", null, "CXLL", null, null);
                         break;
                     case 2:
-
+                        //联通查流量信息
+                        smsManager.sendTextMessage("10010",null,"CXLL",null,null);
                         break;
                     case 3:
-
+                        //电信查流量信息
+                        smsManager.sendTextMessage("10001",null,"108",null,null);
                         break;
                 }
         }
