@@ -31,6 +31,7 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
     private TextView mTotalTV;
     private TextView mUsedTV;
     private TextView mToDayTV;
+    private TextView mOperatorTV;
     private TrafficDao dao;
     private ImageView mRemindIMGV;
     private TextView mRemindTV;
@@ -67,6 +68,8 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
         mRightImgv.setOnClickListener(this);
         mCorrectFlowBtn = (Button) findViewById(R.id.btn_correction_flow);
         mCorrectFlowBtn.setOnClickListener(this);
+        //Operator
+        mOperatorTV = (TextView) findViewById(R.id.tv_operators);
         mTotalTV = (TextView) findViewById(R.id.tv_month_totalgprs);
         mUsedTV = (TextView) findViewById(R.id.tv_month_usedgprs);
         mToDayTV = (TextView) findViewById(R.id.tv_today_gprs);
@@ -88,6 +91,7 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
             }
         }
         mTotalTV.setText("本月流量：" + Formatter.formatFileSize(this, totalflow));
+        //mOperatorTV.setText("运营商是："+Formatter.formatFileSize());
         mUsedTV.setText("本月已用：" + Formatter.formatFileSize(this, usedflow));
         dao = new TrafficDao(this);
         Date date = new Date();
@@ -153,6 +157,41 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
                 String address = smsMessage.getOriginatingAddress();
                 // 以下短信分割只针对中国移动用户
                 if (!address.equals("10086")) {
+                    //
+                    String[] split = body.split("，");
+                    System.out.println(split[0]);
+                    // 本月剩余流量
+                    long left = 0;
+                    // 本月已用流量
+                    long used = 0;
+                    // 本月超出流量
+                    long beyond = 0;
+                    for (int i = 0; i < split.length; i++) {
+                        if (split[i].contains("本月总流量已用")) {
+                            // 套餐总量
+                            String usedflow = split[i].substring(9,
+                                    split[i].length());
+                            used = getStringTofloat(usedflow);
+                        } else if (split[i].contains("剩余")) {
+                            String leftflow = split[i].substring(3,
+                                    split[i].length());
+                            left = getStringTofloat(leftflow);
+                        } else if (split[i].contains("套餐外流量")) {
+                            String beyondflow = split[i].substring(6,
+                                    split[i].length());
+                            beyond = getStringTofloat(beyondflow);
+                        }
+                    }
+                    SharedPreferences.Editor edit = mSP.edit();
+                    System.out.println("-----"+left);
+                    edit.putLong("totalflow", used + left);
+                    edit.putLong("usedflow", used + beyond);
+                    edit.commit();
+                    mOperatorTV.setText("运营商是：中国联通");
+                    mTotalTV.setText("本月流量："
+                            + Formatter.formatFileSize(context, (used + left)));
+                    mUsedTV.setText("本月已用："
+                            + Formatter.formatFileSize(context, (used + beyond)));
                     return;
                 }
                 String[] split = body.split("，");
@@ -184,6 +223,7 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
                 edit.putLong("totalflow", used + left);
                 edit.putLong("usedflow", used + beyond);
                 edit.commit();
+                mOperatorTV.setText("运营商是：中国移动");
                 mTotalTV.setText("本月流量："
                         + Formatter.formatFileSize(context, (used + left)));
                 mUsedTV.setText("本月已用："
