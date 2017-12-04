@@ -17,33 +17,29 @@ import cn.edu.gdmec.android.mobileguard.m8trafficmonitor.db.TrafficOpenHelper;
  */
 
 public class TrafficDao {
-
     private TrafficOpenHelper helper;
-
-    public TrafficDao(Context context){
+    public TrafficDao(Context context) {
         helper = new TrafficOpenHelper(context);
     }
-
-    public long getMoblieGPRS(String dataString){
+    public long getMoblieGPRS(String dataString) {
         SQLiteDatabase db = helper.getReadableDatabase();
         long gprs = 0;
         Cursor cursor = db.rawQuery("select gprs from traffic where date=?",
                 new String[] { "datetime(" + dataString + ")" });
-        if (cursor.moveToNext()){
+        if (cursor.moveToNext()) {
             String gprsStr = cursor.getString(0);
             if (!TextUtils.isEmpty(gprsStr))
                 gprs = Long.parseLong(gprsStr);
-        }else{
+        } else {
             gprs = -1;
         }
         return gprs;
     }
-
-    public void insertTodayGPRS(long gprs){
+    public void insertTodayGPRS(long gprs) {
         SQLiteDatabase db = helper.getReadableDatabase();
         Date dNow = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dNow);
+        Calendar calendar = Calendar.getInstance(); // 得到日历
+        calendar.setTime(dNow);// 把当前时间赋给日历
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dataString = sdf.format(dNow);
         ContentValues values = new ContentValues();
@@ -51,9 +47,7 @@ public class TrafficDao {
         values.put("date", "datetime(" + dataString + ")");
         db.insert("traffic", null, values);
     }
-
-
-    public void UpdataTodayGPRS(long gprs){
+    public void UpdateTodayGPRS(long gprs) {
         SQLiteDatabase db = helper.getWritableDatabase();
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -61,7 +55,7 @@ public class TrafficDao {
         ContentValues values = new ContentValues();
         values.put("gprs", String.valueOf(gprs));
         values.put("date", "datetime(" + dataString + ")");
-        db.update("traffic", values, "date=?", new String[] {"datetime("
-                + dataString + ")"});
+        db.update("traffic", values, "date=?", new String[] { "datetime("
+                + dataString + ")" });
     }
 }

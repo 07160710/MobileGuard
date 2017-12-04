@@ -18,13 +18,13 @@ public class OperatorSetActivity extends AppCompatActivity implements View.OnCli
     private ArrayAdapter mSelectadapter;
     private SharedPreferences msp;
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operator_set);
         msp = getSharedPreferences("config", MODE_PRIVATE);
         initView();
     }
-    private void initView(){
+    private void initView() {
         findViewById(R.id.rl_titlebar).setBackgroundColor(
                 getResources().getColor(R.color.light_green));
         ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
@@ -38,9 +38,9 @@ public class OperatorSetActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.btn_operator_finish).setOnClickListener(this);
     }
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         SharedPreferences.Editor edit = msp.edit();
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgv_leftbtn:
                 edit.putBoolean("isset_operator", false);
                 finish();
