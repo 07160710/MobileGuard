@@ -28,4 +28,6 @@ public class AppInfo {
             return "外部内存";
         }
     }
+    //新加
+    public boolean isLock;
 }
