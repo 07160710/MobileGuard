@@ -60,7 +60,6 @@ public class EnterPswActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view){
         switch (view.getId()){
             case R.id.imgv_go_enterpsw:
-
                 String inputpsw = mPswET.getText().toString().trim();
                 if (TextUtils.isEmpty(inputpsw)){
                     startAnim();
@@ -69,7 +68,6 @@ public class EnterPswActivity extends AppCompatActivity implements View.OnClickL
                 }else {
                     if (!TextUtils.isEmpty(password)){
                         if (MD5Utils.encode(inputpsw).equals(password)){
-
                             Intent intent = new Intent();
                             intent.setAction(App.APPLOCK_ACTION);
                             intent.putExtra("packagename",packagename);
