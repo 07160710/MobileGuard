@@ -45,16 +45,6 @@ public class UrlClient {
 
             // 获取代码返回值
             int respondCode = mHttpURLConnection.getResponseCode();
-            //Log.d("respondCode","respondCode="+respondCode );
-            // 获取返回内容类型
-            String type = mHttpURLConnection.getContentType();
-            //Log.d("type", "type="+type);
-            // 获取返回内容的字符编码
-            String encoding = mHttpURLConnection.getContentEncoding();
-            //Log.d("encoding", "encoding="+encoding);
-            // 获取返回内容长度，单位字节
-            int length = mHttpURLConnection.getContentLength();
-            //Log.d("length", "length=" + length);
 
             if (respondCode == 200) {
                 // 获取响应的输入流对象

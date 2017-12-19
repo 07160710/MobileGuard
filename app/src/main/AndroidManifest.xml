@@ -133,7 +133,7 @@
             android:exported="true" />
 
         <activity android:name=".m9advancedtools.EnterPswActivity" />
-        <activity android:name=".m9advancedtools.AppLockActivity"/>
+        <activity android:name=".m9advancedtools.AppLockActivity"></activity>
     </application>
 
 </manifest>

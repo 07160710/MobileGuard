@@ -262,7 +262,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        System.out.println(process);
+        //System.out.println(process);
         switch (view.getId()) {
             case R.id.imgv_leftbtn:
                 finish();
