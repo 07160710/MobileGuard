@@ -17,7 +17,8 @@ import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m9advancedtools.fragment.AppLockFragment;
 import cn.edu.gdmec.android.mobileguard.m9advancedtools.fragment.AppUnLockFragment;
 
-public class AppLockActivity extends AppCompatActivity implements View.OnClickListener{
+public class AppLockActivity extends AppCompatActivity implements View.OnClickListener {
+
     private ViewPager mAppViewPager;
     List<Fragment> mFragments = new ArrayList<Fragment>();
     private TextView mLockTV;
@@ -35,7 +36,7 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.imgv_leftbtn:
                 finish();
                 break;
@@ -47,35 +48,43 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
-    public void initListener(){
-        mAppViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+
+    private void initListener() {
+        mAppViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
             @Override
             public void onPageSelected(int arg0) {
                 if(arg0 == 0){
                     slideUnLockView.setBackgroundResource(R.drawable.slide_view);
                     slideLockView.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    //未加锁
                     mLockTV.setTextColor(getResources().getColor(R.color.black));
                     mUnLockTV.setTextColor(getResources().getColor(R.color.bright_red));
                 }else{
                     slideLockView.setBackgroundResource(R.drawable.slide_view);
                     slideUnLockView.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    //已加锁
                     mLockTV.setTextColor(getResources().getColor(R.color.bright_red));
                     mUnLockTV.setTextColor(getResources().getColor(R.color.black));
                 }
             }
+
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
 
             }
+
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(int arg0) {
 
             }
         });
 
     }
-    private void initView(){
-        findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.bright_red));
+
+    private void initView() {
+        findViewById(R.id.rl_titlebar).setBackgroundColor(
+                getResources().getColor(R.color.bright_red));
         ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
         ((TextView) findViewById(R.id.tv_title)).setText("程序锁");
         mLeftImgv.setOnClickListener(this);
@@ -92,14 +101,16 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
         mFragments.add(unLock);
         mFragments.add(lock);
         mAppViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+
     }
-    class MyAdapter extends FragmentPagerAdapter{
-        public MyAdapter(FragmentManager fm){
+    class MyAdapter extends FragmentPagerAdapter {
+
+        public MyAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int arg0) {
+        public android.support.v4.app.Fragment getItem(int arg0) {
             return mFragments.get(arg0);
         }
 

@@ -24,7 +24,8 @@ public class SplashActivity extends AppCompatActivity {
         mVersion = MyUtils.getVersion(getApplicationContext());
         mTvVersion = (TextView) findViewById(R.id.tv_splash_version);
         mTvVersion.setText("版本号:"+mVersion);
-        if (!hasPermission()){
+        if (!hasPermission()) {
+            //若用户未开启权限，则引导用户开启“Apps with usage access”权限
             startActivityForResult(
                     new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
                     MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
@@ -47,22 +48,25 @@ public class SplashActivity extends AppCompatActivity {
         //startActivity(new Intent(this, HomeActivity.class));
         //finish();
     }
-    private boolean hasPermission(){
+    private boolean hasPermission() {
         AppOpsManager appOps = (AppOpsManager)
                 getSystemService(Context.APP_OPS_SERVICE);
         int mode = 0;
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                     android.os.Process.myUid(), getPackageName());
         }
         return mode == AppOpsManager.MODE_ALLOWED;
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS){
-            if (!hasPermission()){
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS) {
+            if (!hasPermission()) {
+                //若用户未开启权限，则引导用户开启“Apps with usage access”权限
                 startActivityForResult(
-                        new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+                        new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
+                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
             }
         }
     }

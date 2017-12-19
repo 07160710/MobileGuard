@@ -18,11 +18,11 @@
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     //m6缓存权限
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
-    <!--<uses-permission android:name="android.permission.CLEAR_APP_CACHE" />-->
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
     <!-- 程序锁部分-->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermission" />
+        tools:ignore="ProtectedPermissions" />
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -126,12 +126,15 @@
         <activity android:name=".m8trafficmonitor.TrafficMonitoringActivity" />
         <activity android:name=".m9advancedtools.NumBelongtoActivity" />
         <activity android:name=".m9advancedtools.AdvancedToolsActivity" />
-        <activity android:name=".m9advancedtools.AppLockActivity"/>
-        <activity android:name=".m9advancedtools.EnterPswActivity" />
+
+
         <service
             android:name=".m9advancedtools.service.AppLockService"
-            android:persistent="true" />
+            android:enabled="true"
+            android:exported="true" />
 
+        <activity android:name=".m9advancedtools.EnterPswActivity" />
+        <activity android:name=".m9advancedtools.AppLockActivity"/>
     </application>
 
 </manifest>
