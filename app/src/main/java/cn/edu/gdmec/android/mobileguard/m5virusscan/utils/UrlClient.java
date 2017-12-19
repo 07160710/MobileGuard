@@ -8,17 +8,13 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Administrator on 2017/11/28.
- */
-
 public class UrlClient {
     public static String UrlPost(String url, String content) {
         try {
             URL mUrl = new URL(url);
             HttpURLConnection mHttpURLConnection = (HttpURLConnection) mUrl.openConnection();
             //设置链接超时时间
-            mHttpURLConnection.setConnectTimeout(20000);
+            mHttpURLConnection.setConnectTimeout(15000);
             //设置读取超时时间
             mHttpURLConnection.setReadTimeout(15000);
             //设置请求参数
@@ -51,13 +47,13 @@ public class UrlClient {
             int respondCode = mHttpURLConnection.getResponseCode();
             //Log.d("respondCode","respondCode="+respondCode );
             // 获取返回内容类型
-            //String type = mHttpURLConnection.getContentType();
+            String type = mHttpURLConnection.getContentType();
             //Log.d("type", "type="+type);
             // 获取返回内容的字符编码
-            //String encoding = mHttpURLConnection.getContentEncoding();
+            String encoding = mHttpURLConnection.getContentEncoding();
             //Log.d("encoding", "encoding="+encoding);
             // 获取返回内容长度，单位字节
-            //int length = mHttpURLConnection.getContentLength();
+            int length = mHttpURLConnection.getContentLength();
             //Log.d("length", "length=" + length);
 
             if (respondCode == 200) {

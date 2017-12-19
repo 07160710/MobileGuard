@@ -127,7 +127,6 @@
         <activity android:name=".m9advancedtools.NumBelongtoActivity" />
         <activity android:name=".m9advancedtools.AdvancedToolsActivity" />
 
-
         <service
             android:name=".m9advancedtools.service.AppLockService"
             android:enabled="true"
