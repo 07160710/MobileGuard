@@ -46,7 +46,7 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         public void handleMessage(Message msg) {
             if (msg.what == 0){
                 AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
-                String dbVersion = dao.getVirusVersion();
+                String dbVersion = dao.getVirusDbVersion();
                 mDbVersionTV = (TextView) findViewById(R.id.tv_dbversion);
                 mDbVersionTV.setText("病毒数据库版本:"+dbVersion);
                 UpdateDb(dbVersion);

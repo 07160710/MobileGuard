@@ -27,10 +27,10 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.adapter.ScanVirusAdapter;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.entity.ScanAppInfo;
-import cn.edu.gdmec.android.mobileguard.m5virusscan.utils.MD5Utils;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.utils.UrlClient;
 
 public class VirusScanSpeedActivity extends AppCompatActivity implements View.OnClickListener{
