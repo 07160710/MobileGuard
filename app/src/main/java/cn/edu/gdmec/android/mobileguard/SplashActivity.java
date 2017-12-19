@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                     new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
                     MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
         }
-        VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
+        /*VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
             @Override
             public void afterDownload(String filename) {
                 MyUtils.installApk(SplashActivity.this,filename);
@@ -43,9 +43,9 @@ public class SplashActivity extends AppCompatActivity {
                 versionUpdateUtils.getCloudVersion("http://android2017.duapp.com/updateinfo.html");
 
             }
-        }.start();
-        //startActivity(new Intent(this, HomeActivity.class));
-        //finish();
+        }.start();*/
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
     private boolean hasPermission(){
         AppOpsManager appOps = (AppOpsManager)
