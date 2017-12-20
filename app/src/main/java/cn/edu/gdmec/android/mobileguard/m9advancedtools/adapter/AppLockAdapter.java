@@ -13,7 +13,6 @@ import java.util.List;
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
-
 public class AppLockAdapter extends BaseAdapter {
     private List<AppInfo> appInfos;
     private Context context;
