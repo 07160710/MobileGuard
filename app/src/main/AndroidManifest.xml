@@ -19,10 +19,11 @@
     //m6缓存权限
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
-    <!-- 程序锁部分-->
+    <!-- 程序锁部分 -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -130,10 +131,10 @@
         <service
             android:name=".m9advancedtools.service.AppLockService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"/>
 
-        <activity android:name=".m9advancedtools.EnterPswActivity" />
-        <activity android:name=".m9advancedtools.AppLockActivity"></activity>
+        <activity android:name=".m9advancedtools.AppLockActivity" />
+        <activity android:name=".m9advancedtools.EnterPswActivity"></activity>
     </application>
 
 </manifest>

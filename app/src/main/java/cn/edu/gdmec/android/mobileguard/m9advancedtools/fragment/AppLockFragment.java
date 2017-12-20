@@ -30,7 +30,6 @@ import cn.edu.gdmec.android.mobileguard.m4appmanager.utils.AppInfoParser;
 import cn.edu.gdmec.android.mobileguard.m8trafficmonitor.utils.SystemInfoUtils;
 import cn.edu.gdmec.android.mobileguard.m9advancedtools.adapter.AppLockAdapter;
 import cn.edu.gdmec.android.mobileguard.m9advancedtools.db.dao.AppLockDao;
-import cn.edu.gdmec.android.mobileguard.m9advancedtools.service.AppLockService;
 
 public class AppLockFragment extends Fragment {
     private Context context;
